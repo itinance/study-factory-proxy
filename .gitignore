@@ -1,0 +1,22 @@
+node_modules
+.idea
+
+.env
+.env.*
+!.env.dist
+coverage
+coverage.json
+
+# typechain
+typechain
+typechain-types
+
+#Hardhat files
+cache
+artifacts
+
+yarn-error.log
+
+
+.openzeppelin
+.DS_Store
