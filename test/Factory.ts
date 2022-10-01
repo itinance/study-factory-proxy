@@ -27,7 +27,6 @@ describe("BoxFactory", function () {
     const {boxFactory} = await loadFixture(deployFactory);
 
     const tokenTransaction: ContractTransaction = await boxFactory.createBox(5, 6 );
-
     const receipt: ContractReceipt = await tokenTransaction.wait();
     const boxAddress = findEventArgsByNameFromReceipt(receipt, 'BoxDeployed', 'instance');
 

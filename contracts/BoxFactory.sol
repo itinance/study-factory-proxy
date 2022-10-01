@@ -11,6 +11,8 @@ contract BoxFactory is Initializable {
 
     address private _impl;
 
+    address[] private _instances;
+
     function initialize(address impl_) public initializer {
         _impl = impl_;
     }
@@ -26,8 +28,32 @@ contract BoxFactory is Initializable {
         address clone = Clones.clone(_impl);
         BoxV1(clone).initialize(_length, _width);
 
+        _instances.push(address(clone));
+
         emit BoxDeployed(address(clone));
 
         return clone;
     }
+
+    /**
+     * @dev Returns the number of deployed tokens.
+     */
+    function getInstancesCount() public view returns (uint256) {
+        return _instances.length;
+    }
+
+    /**
+      * @dev Returns one of the instances. `index` must be a
+     * value between 0 and {getInstancesCount}, non-inclusive.
+     *
+     * Tokens are not sorted in any particular way, and their ordering may
+     * change at any point.
+     */
+    function getInstance(uint256 index) public view returns (address) {
+        if (index >= _instances.length) {
+            revert("Index out of bounds");
+        }
+        return _instances[index];
+    }
+
 }

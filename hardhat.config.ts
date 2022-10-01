@@ -6,6 +6,7 @@ require("@nomiclabs/hardhat-ethers")
 import '@openzeppelin/hardhat-upgrades';
 
 import {node_url, accounts, addForkConfiguration} from './utils/network';
+import {ethers} from "hardhat";
 
 const INFURA_API_KEY = process.env.INFURA_API_KEY || '';
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || '';
@@ -98,8 +99,6 @@ const config: HardhatUserConfig = {
         },
       }
       : undefined,
-
-
 };
 
 
