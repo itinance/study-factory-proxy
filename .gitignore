@@ -20,3 +20,5 @@ yarn-error.log
 
 .openzeppelin
 .DS_Store
+
+./deployments

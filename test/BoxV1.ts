@@ -21,8 +21,15 @@ describe("BoxV1", function () {
     it("Should deploy box 3x4", async function () {
       const {box} = await loadFixture(deployBoxV1_3x4);
 
+      expect(box.address).to.be.properAddress;
+    });
+
+    it("Should be able to call functions", async function () {
+      const {box} = await loadFixture(deployBoxV1_3x4);
+
       expect(await box.area()).to.equal(3 * 4);
     });
+
   })
 
 });
