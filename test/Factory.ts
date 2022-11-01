@@ -24,7 +24,7 @@ describe("BoxFactory", function () {
   }
 
   async function cloneMeABox_5x6() {
-    const {boxFactory} = await loadFixture(deployFactory);
+    const {boxFactory} = await deployFactory();
 
     const tokenTransaction: ContractTransaction = await boxFactory.createBox(5, 6 );
     const receipt: ContractReceipt = await tokenTransaction.wait();
