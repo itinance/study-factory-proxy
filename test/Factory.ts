@@ -34,11 +34,7 @@ describe("BoxFactory", function () {
 
     expect(boxAddress).to.be.properAddress;
 
-    const contractFactory = (await ethers.getContractFactory('BoxV1')) as BoxV1__factory;
-    const box = contractFactory.attach(boxAddress);
-
-    // this is actually the same, leading to the same error
-    //const box = await ethers.getContractAt('BoxV1', boxAddress)
+    const box = await ethers.getContractAt('BoxV1', boxAddress)
 
     return {box};
   }
