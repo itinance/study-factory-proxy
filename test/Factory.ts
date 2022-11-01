@@ -4,6 +4,7 @@ import {ethers, upgrades} from "hardhat";
 import {ContractReceipt, ContractTransaction} from "ethers";
 import {BoxFactory, BoxFactory__factory, BoxV1__factory} from "../typechain";
 import {findEventArgsByNameFromReceipt} from "./lib/ethers-utils";
+import { getImplementationAddress } from '@openzeppelin/upgrades-core';
 
 
 describe("BoxFactory", function () {
@@ -15,7 +16,8 @@ describe("BoxFactory", function () {
 
     const boxFactoryFactory = (await ethers.getContractFactory('BoxFactory')) as BoxFactory__factory;
 
-    const boxFactory = (await upgrades.deployProxy(boxFactoryFactory, [boxV1.address])) as BoxFactory;
+    const implAddress = await getImplementationAddress(ethers.provider, boxV1.address);
+    const boxFactory = (await upgrades.deployProxy(boxFactoryFactory, [implAddress])) as BoxFactory;
     await boxFactory.deployed();
 
     console.log(1, boxFactory.address);
@@ -57,7 +59,7 @@ describe("BoxFactory", function () {
     it("Should be able to accass properties of the box", async function () {
       const {box} = await loadFixture(cloneMeABox_5x6);
 
-      expect(await box.width()).to.eq(5);
+      expect(await box.width()).to.eq(6);
     });
 
     it("Should be able to call functions on the box", async function () {
