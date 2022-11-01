@@ -52,7 +52,7 @@ describe("BoxFactory", function () {
       expect(box.address).to.be.properAddress;
     });
 
-    it("Should be able to accass properties of the box", async function () {
+    it("Should be able to access properties of the box", async function () {
       const {box} = await loadFixture(cloneMeABox_5x6);
 
       expect(await box.width()).to.eq(6);
